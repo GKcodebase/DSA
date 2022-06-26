@@ -7,6 +7,7 @@ using namespace std;
  */
 void peakElement(int a[],int l){
     cout<<"The peak elements are :: ";
+    //check i with i-1 and i+1 exclude first and last element.
     for(int i = 1;i<l-1; i++){
         if(a[i] > a[i-1] && a[i] > a[i+1])
             cout<<a[i]<<endl;

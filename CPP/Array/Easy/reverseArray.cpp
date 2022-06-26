@@ -16,6 +16,7 @@ void reverse(int a[], int l){
     int s =0,e=l-1;
     cout<<"Array before reversing :: "<<endl;
     printArray(a,l);
+    //Reverse the array by swapping first and last elements.
     while(s<e){
         int temp = a[s];
         a[s++] = a[e];

@@ -7,6 +7,7 @@ using namespace std;
  * @return prints minimum and maximum element. 
  */
 void findMinimumAndMaximum(int a[],int l){
+    //Iterate over all element an check for min and max
     int mine = a[0];
     int maxe = a[0];
     for(int i = 1;i<l; i++){

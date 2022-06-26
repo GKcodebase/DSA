@@ -12,11 +12,16 @@ using namespace std;
 void squareAndSortSortedArray(int a[], int s){
     int l = 0,r=s-1;
     int result[s];
+    //Iterate over the array
     for(int index =s-1;index>=0;index--){
+        //if left element's absolute value is larger than right
+        // -> then sqaure and store it in new array ,increment left pointer 
         if(abs(a[l])>a[r]){
             result[index] = a[l]*a[l];
             l++;
-        }else {
+        }
+        //else do the same with right element.
+        else {
             result[index] = a[r]*a[r];
             r--;
         }
