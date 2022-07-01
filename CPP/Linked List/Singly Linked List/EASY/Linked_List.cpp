@@ -89,6 +89,15 @@ void addAtIndex(int index,int val){
     n->next=temp->next;
     temp->next = n;
 }
+void deleteFirst(){
+    head=head->next;
+}
+void deleteLast(){
+    Node *temp = head;
+    while(temp->next->next != NULL)
+        temp=temp->next;
+    temp->next=NULL;
+}
 int main(){
     //Driver code to run methods.
     addFirst(30);
@@ -96,6 +105,11 @@ int main(){
     addFirst(10);
     addLast(40);
     addAtIndex(1,15);
+    printLinkedList();
+    deleteFirst();
+    deleteLast();
+    addLast(35);
+    addFirst(5);
     printLinkedList();
     cout<<"Current length of linked list :: "<<size<<endl;
 }
