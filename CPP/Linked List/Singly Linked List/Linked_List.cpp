@@ -6,6 +6,9 @@
  * Adding element at head - addFirst()
  * Adding element at end - addLast()
  * Adding element at given index - addAtIndex()
+ * Deleting element from head - deleteFirst()
+ * Deleting element at end - deleteLast()
+ * Deleting element at given position - deleteAtIndex()
  * @version 0.1
  * @date 2022-06-30
  * 
@@ -89,14 +92,47 @@ void addAtIndex(int index,int val){
     n->next=temp->next;
     temp->next = n;
 }
+/**
+ * @brief deleteFirst changing head to next element
+ * O(1) time complexity
+ * 
+ */
 void deleteFirst(){
     head=head->next;
+    size--;
 }
+/**
+ * @brief deleteLast keeping last node as null
+ * O(n) time complexity
+ * 
+ */
 void deleteLast(){
+    size--;
     Node *temp = head;
     while(temp->next->next != NULL)
         temp=temp->next;
     temp->next=NULL;
+}
+/**
+ * @brief Delete node at index
+ * O(n) time complexity
+ * 
+ * @param index 
+ */
+void deleteAtIndex(int index){
+    if(index == 0)
+        deleteFirst();
+    else if(size==index+1)
+        deleteLast();
+    else{
+        Node *temp ,*pre = head;
+        for(int i =0;i<index;i++){
+            pre = temp;
+            temp=temp->next;
+        }
+        pre->next = temp->next;
+    }
+    size--;
 }
 int main(){
     //Driver code to run methods.
@@ -110,6 +146,7 @@ int main(){
     deleteLast();
     addLast(35);
     addFirst(5);
+    deleteAtIndex(2);
     printLinkedList();
     cout<<"Current length of linked list :: "<<size<<endl;
 }
