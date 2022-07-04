@@ -4,8 +4,8 @@
  * @version 0.1
  * @date 2022-07-02
  * Insertion - insert(int,Node*)
- * Search
- * Get Height
+ * Search -  search(Node*,int)
+ * Get Height - height(Node*)
  * Traversal- 
  *          preorder
  *          inorder
@@ -18,6 +18,7 @@
  */
 #include<iostream>
 #include<queue>
+#include<math.h>
 using namespace std;
 /**
  * @brief Node template class
@@ -38,18 +39,18 @@ class Node{
  * @brief Insert a value in BST
  * 
  * @param val 
- * @param head 
+ * @param root 
  * @return Node* 
  */
-Node* insert(int val,Node *head){
+Node* insert(int val,Node *root){
     Node *n = new Node(val);
-    if(head == NULL)
+    if(root == NULL)
         return n;
-    if(val > head->val)
-        head->right = insert(val,head->right);
+    if(val > root->val)
+        root->right = insert(val,root->right);
     else
-        head->left = insert(val,head->left);
-    return head;   
+        root->left = insert(val,root->left);
+    return root;   
 }
 /**
  * @brief prints level order traversal of BST
@@ -74,6 +75,39 @@ void printLevelOrder(Node *root){
     }
     cout<<endl;
 }
+/**
+ * @brief Search element in BST in recursive way
+ * O(logn) time complexity.
+ * 
+ * @param root 
+ * @param val 
+ * @return true 
+ * @return false 
+ */
+bool search(Node *root,int val){
+    if(root == NULL)
+        return false;
+    else if(val == root->val)
+        return true;
+    if(root->val > val)
+        return search(root->left,val);
+    else
+        return search(root->right,val);
+}
+/**
+ * @brief Check height using recurssion.
+ * 
+ * @param root 
+ * @return int 
+ */
+int height(Node *root){
+    int h =0;
+    if(root == NULL)
+        return h;
+    int lheight = height(root->left);
+    int rheight = height(root->right);
+    return max(lheight,rheight)+1;
+}
 int main(){
     /**
      * @brief Driver code to test method
@@ -81,12 +115,16 @@ int main(){
      *   30     70
      * 20  40 60  80
      */
-    Node *head = insert(50,NULL);
-    head = insert(30,head);
-    head = insert(20,head);
-    head = insert(40,head);
-    head = insert(70,head);
-    head = insert(60,head);
-    head = insert(80,head);
-    printLevelOrder(head);
+    Node *root = insert(50,NULL);
+    root = insert(30,root);
+    root = insert(20,root);
+    root = insert(40,root);
+    root = insert(70,root);
+    root = insert(60,root);
+    root = insert(80,root);
+    printLevelOrder(root);
+    cout<<"Search element in 50 :: "<<search(root,50)<<endl;
+    cout<<"Search element in 10 :: "<<search(root,10)<<endl;
+    cout<<"Height of BST is :: "<<height(root);
+
 }
