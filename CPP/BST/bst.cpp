@@ -7,9 +7,9 @@
  * Search -  search(Node*,int)
  * Get Height - height(Node*)
  * Traversal- 
- *          preorder
- *          inorder
- *          postorder
+ *          preorder - preOreder(Node*)
+ *          inorder - inOrder(Node*)
+ *          postorder - postOrder(Node*)
  *          levelorder - printLevelOrder(Node*)
  * Deletion
  * 
@@ -108,6 +108,42 @@ int height(Node *root){
     int rheight = height(root->right);
     return max(lheight,rheight)+1;
 }
+/**
+ * @brief preorder traversal using recurssion.
+ * 
+ * @param root 
+ */
+void preOreder(Node *root){
+    if(root == NULL)
+        return;
+    cout<<root->val<<" ";
+    preOreder(root->left);
+    preOreder(root->right);
+}
+/**
+ * @brief inorder traversal using recurssion.
+ * 
+ * @param root 
+ */
+void inOrder(Node *root){
+    if(root == NULL)
+        return;
+    inOrder(root->left);
+    cout<<root->val<<" ";
+    inOrder(root->right);
+}
+/**
+ * @brief postorder taversal using recurssion.
+ * 
+ * @param root 
+ */
+void postOrder(Node *root){
+    if(root == NULL)
+        return;
+    postOrder(root->left);
+    postOrder(root->right);
+    cout<<root->val<<" ";
+}
 int main(){
     /**
      * @brief Driver code to test method
@@ -125,6 +161,12 @@ int main(){
     printLevelOrder(root);
     cout<<"Search element in 50 :: "<<search(root,50)<<endl;
     cout<<"Search element in 10 :: "<<search(root,10)<<endl;
-    cout<<"Height of BST is :: "<<height(root);
+    cout<<"Height of BST is :: "<<height(root)<<endl;
+    cout<<endl<<"Preorder traversal : ";
+    preOreder(root);
+    cout<<endl<<"Inorder traversal : ";
+    inOrder(root);
+    cout<<endl<<"Postrorder traversal : ";
+    postOrder(root);
 
 }
