@@ -134,6 +134,14 @@ void deleteAtIndex(int index){
     }
     size--;
 }
+/**
+ * @brief Get the Length linkedList
+ * 
+ * @return int 
+ */
+int getLength(){
+    return size;
+}
 int main(){
     //Driver code to run methods.
     addFirst(30);
@@ -148,5 +156,5 @@ int main(){
     addFirst(5);
     deleteAtIndex(2);
     printLinkedList();
-    cout<<"Current length of linked list :: "<<size<<endl;
+    cout<<"Current length of linked list :: "<<getLength()<<endl;
 }
