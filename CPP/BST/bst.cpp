@@ -11,7 +11,7 @@
  *          inorder - inOrder(Node*)
  *          postorder - postOrder(Node*)
  *          levelorder - printLevelOrder(Node*)
- * Deletion
+ * Deletion - deleteNode(Node*,int)
  * 
  * @copyright Copyright (c) 2022
  * 
@@ -144,6 +144,58 @@ void postOrder(Node *root){
     postOrder(root->right);
     cout<<root->val<<" ";
 }
+/**
+ * @brief Finiding inorder successor
+ * 
+ * @param root 
+ * @return Node* 
+ */
+Node* minValueNode(Node *root){
+    Node *current = root;
+    /*Loop till left most element.*/
+    while (current && current->left != NULL)
+        current = current->left;
+ 
+    return current;
+}
+/**
+ * @brief   Deleting an element in BST
+ * if leaf node simply remove the node.
+ * if node has only one element copy that to node and remove node
+ * if node has many children find the inorder predecessor and replace it
+ * 
+ * @param root 
+ * @param key 
+ * @return Node* 
+ */
+Node* deleteNode(Node* root , int key){
+    if(root == NULL)
+        return root;
+    if(key > root->val)
+        root->right = deleteNode(root->right,key);
+    else if(key < root->val)
+        root->left = deleteNode(root->left,key);
+    else{
+        /*Leaf Node.*/
+        if (root->left==NULL and root->right==NULL)
+            return NULL;
+        /*Node with one child.*/
+        else if(root->left == NULL){
+            Node* temp = root->right;
+            root = NULL;
+            return temp;
+        }/*Node with one child.*/
+         else if(root->right == NULL){
+            Node* temp = root->left;
+            root = NULL;
+            return temp;
+        }    /*Node with many children.*/
+        Node* temp = minValueNode(root->right);
+        root->val= temp->val;
+        root->right = deleteNode(root->right, temp->val);
+    }
+    return root;
+}
 int main(){
     /**
      * @brief Driver code to test method
@@ -168,5 +220,10 @@ int main(){
     inOrder(root);
     cout<<endl<<"Postrorder traversal : ";
     postOrder(root);
+    deleteNode(root,50); 
+    deleteNode(root,80);
+    cout<<endl<<"Level order traversal after deletion"<<endl;
+    printLevelOrder(root);
+
 
 }
