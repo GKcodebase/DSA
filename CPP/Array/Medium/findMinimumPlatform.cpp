@@ -17,11 +17,10 @@ int findMinimumPlatform(int arr[], int dep[], int n)
     {
         a[i] = make_pair(arr[i], dep[i]);
     }
-    for(int i =0;i<n;i++)
-        cout<<a[i].first<<" "<<a[i].second<<endl;
     sort(a.begin(), a.end());
-    for(int i =0;i<n;i++)
-        cout<<a[i].first<<" "<<a[i].second<<endl;
+    /*Create a priority queue.
+      Keep track of departure time and increment count they are overlapping.
+    */
     priority_queue<int, vector<int>, greater<int> > p;
     int count = 1;
     p.push(a[0].second);
